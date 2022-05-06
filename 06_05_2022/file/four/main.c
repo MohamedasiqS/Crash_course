@@ -2,7 +2,7 @@
 #include <stdlib.h>
 int main(void)
 {  
-   char ch;
+   char ch,d;
    int word = -1,line = 0,character = 0;
    FILE *fp=NULL;
    fp = fopen("count.txt","r");
@@ -15,7 +15,15 @@ int main(void)
    while ((ch = fgetc(fp) ) != EOF)
    {
       if ( ch == ' ')
-         word++;
+        {
+           if ( (d = fgetc(fp)) != ' ')
+           {
+               word++;
+               fseek(fp,-1,1);
+           }
+           else
+             fseek(fp,-1,1);
+        }
       else if(ch == '\n')
       {
          line++;
